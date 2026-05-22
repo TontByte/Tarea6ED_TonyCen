@@ -3,12 +3,14 @@
 #include <iostream>
 #include <stdexcept>
 #include <ctime>
+#include <cmath>
 #include "LinkedList.h"
 
 using std::cout;
 using std::runtime_error;
 using std::cin;
 using std::endl;
+using std::pow;
 
 int getNumValue(int maxIndex, int minIndex) {
     if (maxIndex < 0 || minIndex > maxIndex) {
@@ -47,10 +49,47 @@ void fillRand(LinkedList<int>& refList, int listSize) {
     }
 }
 
-void radixSort(LinkedList<int>& refList, int base) {
-    
+int maxDigits(LinkedList<int>& refList) {
+    if (refList.getSize() == 0) {
+        throw runtime_error("Lista de referencia esta vacia. Secuencia incorrecta");
+    }
+    int temp = 0;
+    for (refList.goToStart(); !refList.atEnd(); refList.next()) {
+        if (refList.getElement() > temp) {
+            temp = refList.getElement();
+        }
+    }
+
+    if (temp == 0) {
+        return 1;
+    }
+
+    int cant = 0;
+    while (temp != 0) {
+        cant++;
+        temp = temp / 10;
+    }
+    return cant;
 }
 
+void radixSort(LinkedList<int>& refList, int base) {
+    LinkedList<int> tempList;
+    LinkedList<int> resList;
+    int digitCant = maxDigits(refList);
+    int cont = 0; //contador??
+    while (cont < digitCant) {
+        for (refList.goToStart(); !refList.atEnd(); refList.next()) {
+            int num = refList.getElement();
+            int digit = (num / (int)pow(10, cont)) % 10;
+
+        }
+    }
+}
+
+
+//exponente no es para cantidad de baldes, pero para cantidad de digitos
+//(num/pow(10,exponent))%10
+//converted with base itd be (num/pow(base,exponent))%base
 
 int main(){
     cout << "Ingrese el tamaño de la lista que desea ordenar (mayor que 1): " << endl;
