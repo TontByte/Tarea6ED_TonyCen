@@ -73,34 +73,59 @@ int maxDigits(LinkedList<int>& refList) {
 }
 
 void radixSort(LinkedList<int>& refList, int base) {
-    LinkedList<int> tempList;
-    LinkedList<int> resList;
-    int digitCant = maxDigits(refList);
-    int cont = 0; //contador??
-    while (cont < digitCant) {
+    LinkedList<int>* buckets = new LinkedList<int>[base];
+    int cantMaxDigits = maxDigits(refList);
+    int cont = 0;
+    int divisor = 1;
+    while (cont < cantMaxDigits) {
         for (refList.goToStart(); !refList.atEnd(); refList.next()) {
-            int num = refList.getElement();
-            int digit = (num / (int)pow(10, cont)) % 10;
-
+            int digit = (refList.getElement() / divisor) % base;
+            buckets[digit].append(refList.getElement());
         }
+        refList.clear();
+        for (int i = 0; i < base; i++) {
+            for (buckets[i].goToStart(); !buckets[i].atEnd(); buckets[i].next()) {
+                refList.append(buckets[i].getElement());
+            }
+            buckets[i].clear();
+        }
+        divisor = divisor * base;
+        cont++;
     }
+    delete[] buckets;
 }
 
 
 //exponente no es para cantidad de baldes, pero para cantidad de digitos
 //(num/pow(10,exponent))%10
 //converted with base itd be (num/pow(base,exponent))%base
+//use 1 then multiply by base in cycle, genius.
 
 int main(){
-    cout << "Ingrese el tamaño de la lista que desea ordenar (mayor que 1): " << endl;
-    int listSize = getNumValue(2147483647, 1);
-    LinkedList<int>* lista = new LinkedList<int>();
+    int yuh = 1;
+    do {
+        cout << "Ingrese el tamaño de la lista que desea ordenar (mayor que 1): " << endl;
+        int listSize = getNumValue(2147483647, 1);
+        LinkedList<int>* lista = new LinkedList<int>();
 
-    cout << "Ingrese la base numerica que desea utilziar en el ordenamiento (mayor que 2): " << endl;
-    int base = getNumValue(2147483647, 1);
+        cout << "Ingrese la base numerica que desea utilziar en el ordenamiento (mayor que 2): " << endl;
+        int base = getNumValue(2147483647, 1);
 
-    srand(time(0));
-    fillRand(*lista, listSize);
+        srand(time(0));
+        fillRand(*lista, listSize);
+
+        cout << "Lista creada con numeros random del 0-999" << endl;
+        lista->print();
+
+        cout << "Lista ordenada con radixSort:" << endl;
+        radixSort(*lista, base);
+        lista->print();
+        delete lista;
+
+        cout << "Si desea repetir el programa desde el inicio ingrese 1, sino ingrese 0" << endl;
+        yuh = getNumValue(1, 0);
+    } while (yuh != 0);
+    return 0;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu
