@@ -38,7 +38,6 @@ int getNumValue(int maxIndex, int minIndex) {
     }
 }
 
-//ask about ammount of digits
 void fillRand(LinkedList<int>& refList, int listSize) {
     int i = 0;
     while (i < listSize) {
@@ -54,12 +53,10 @@ void radixSort(LinkedList<int>& refList, int base) {
 
 
 int main(){
-    //ask about this too
     cout << "Ingrese el tamaño de la lista que desea ordenar (mayor que 1): " << endl;
     int listSize = getNumValue(2147483647, 1);
     LinkedList<int>* lista = new LinkedList<int>();
 
-    //ask about this
     cout << "Ingrese la base numerica que desea utilziar en el ordenamiento (mayor que 2): " << endl;
     int base = getNumValue(2147483647, 1);
 
