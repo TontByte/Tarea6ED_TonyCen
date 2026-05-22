@@ -109,7 +109,7 @@ int main(){
         LinkedList<int>* lista = new LinkedList<int>();
 
         cout << "Ingrese la base numerica que desea utilziar en el ordenamiento (mayor que 2): " << endl;
-        int base = getNumValue(2147483647, 1);
+        int base = getNumValue(2147483647, 2);
 
         srand(time(0));
         fillRand(*lista, listSize);
