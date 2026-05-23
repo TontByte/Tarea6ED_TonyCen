@@ -1,0 +1,19 @@
+Pruebas con diferentes bases con lista de tamaño 10 (promedios de tiempo de ejecución con milisegundos)
+Base 2: 121
+Base 4: 67
+Base 6: 59
+Base 10: 50
+Base 12: 55
+Base 16: 40
+Base 20: 59
+Se concluye que el tiempo de ejecución es más alto si la base es muy pequeña o muy alta. El intervalo donde es más rápido es entre la base 10 y la base 16.
+
+Pruebas con diferentes tamaños de lista con base 10 (promedios de tiempo de ejecución con milisegundos)
+Tamaño 5: 41
+Tamaño 25: 65
+Tamaño 50: 115
+Tamaño 100: 193
+El tiempo de ejecución del radixSort incrementa basado en el tamaño de la lista aunque los cambios parecen considerables entre tamaño 5 y 100, sigue ejecutándose en menos de un segundo.
+
+Configuración recomendada:
+Utilizar una base entre 10 y 16 ya que son las más rápidas para ejecutar el ordenamiento. En cuanto al tamaño de la lista, mientras se logre mantener a menos de 500 elementos se debería ejecutar sin sobrepasar 1 segundo entero. 
