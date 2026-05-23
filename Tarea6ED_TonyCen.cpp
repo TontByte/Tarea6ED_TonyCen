@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <ctime>
 #include <cmath>
+#include <chrono>
 #include "LinkedList.h"
 
 using std::cout;
@@ -11,6 +12,7 @@ using std::runtime_error;
 using std::cin;
 using std::endl;
 using std::pow;
+using namespace std::chrono_literals;
 
 int getNumValue(int maxIndex, int minIndex) {
     if (maxIndex < 0 || minIndex > maxIndex) {
@@ -118,7 +120,12 @@ int main(){
         lista->print();
 
         cout << "Lista ordenada con radixSort:" << endl;
+        
+        auto start = std::chrono::high_resolution_clock::now();
         radixSort(*lista, base);
+        auto end = std::chrono::high_resolution_clock::now();
+        auto duration = end - start;
+        cout << "Duracion = " << duration / 1us << endl;
         lista->print();
         delete lista;
 
