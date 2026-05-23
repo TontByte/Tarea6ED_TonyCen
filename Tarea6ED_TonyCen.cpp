@@ -49,7 +49,7 @@ void fillRand(LinkedList<int>& refList, int listSize) {
     }
 }
 
-int maxDigits(LinkedList<int>& refList) {
+int maxDigits(LinkedList<int>& refList, int base) {
     if (refList.getSize() == 0) {
         throw runtime_error("Lista de referencia esta vacia. Secuencia incorrecta");
     }
@@ -67,14 +67,14 @@ int maxDigits(LinkedList<int>& refList) {
     int cant = 0;
     while (temp != 0) {
         cant++;
-        temp = temp / 10;
+        temp = temp / base;
     }
     return cant;
 }
 
 void radixSort(LinkedList<int>& refList, int base) {
     LinkedList<int>* buckets = new LinkedList<int>[base];
-    int cantMaxDigits = maxDigits(refList);
+    int cantMaxDigits = maxDigits(refList, base);
     int cont = 0;
     int divisor = 1;
     while (cont < cantMaxDigits) {
